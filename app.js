@@ -2,8 +2,7 @@ const router = require('router');
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-    var respond = new router(req, res);
-    respond.getResponse();
+    router.getResponse(req.url, res);
 });
 
 server.listen(3000, (error) => {
