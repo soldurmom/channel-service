@@ -1,13 +1,9 @@
+const router = require('router');
 const http = require('http');
+
 const server = http.createServer((req, res) => {
-    res.setHeader('Content-type','text/html');
-    if(req.url == '/home'){
-        res.write('hello');
-    }
-    else{
-        res.write('not found');
-    }
-    res.end();
+    var respond = new router(req, res);
+    respond.getResponse();
 });
 
 server.listen(3000, (error) => {
