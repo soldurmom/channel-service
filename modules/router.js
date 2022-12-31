@@ -1,4 +1,4 @@
-const controller = require('controller');
+const controller = require('./controller');
 const callArr = {
     '/' : 'home',
     '/about' : 'about',
@@ -6,12 +6,10 @@ const callArr = {
 }
 
 module.exports.getResponse = (url, res) => {
-        var found = false;
         res.setHeader('Content-type','text/html');
-        if(url in callArr){
+        if(url in callArr)
             controller[callArr[url]](res);
-            found = true;
-        }
-        if(!found) controller['notFound'](res);
+        else
+            controller['notFound'](res);
         res.end();
 }

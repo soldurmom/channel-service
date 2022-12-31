@@ -1,4 +1,4 @@
-const router = require('router');
+const router = require('./modules/router');
 const http = require('http');
 
 const server = http.createServer((req, res) => {

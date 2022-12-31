@@ -1,6 +1,9 @@
+const templater = require('./templater');
+
 module.exports = controller = {
     home : (res) => {
-        res.write('wellcome to home-page');
+        res.write(templater.generator('layout', 'home'));
+        //res.write('wellcome to home-page');
     },
     about : (res) => {
         res.write('wellcome to about-page');
