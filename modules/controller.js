@@ -1,16 +1,20 @@
 const templater = require('./templater');
 
 module.exports = controller = {
-    home : (res) => {
+    home : (res, params) => {
         res.write(templater.generator('home'));
     },
-    about : (res) => {
+    about : (res, params) => {
         res.write('wellcome to about-page');
     },
-    contacts : (res) => {
+    contacts : (res, params) => {
         res.write('wellcome to contacts-page');
     },
-    notFound : (res) => {
+    get : (res, params) => {
+        res.write('go to server console');
+        console.log(params);
+    },
+    notFound : (res, params) => {
         res.write('not found');
     }
 }
