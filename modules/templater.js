@@ -7,7 +7,7 @@ const templates = {
     product : "product.html",
 }
 
-module.exports.generator = (layout,template) => {
+module.exports.generator = (template, layout = 'layout') => {
     layout = layout == 'layout' ? layout : 'templates/' + layout;
     var temp = fs.readFileSync('public/templates/' + templates[template], "utf8");
     var main = fs.readFileSync('public/' + layout + '.html', "utf8");
