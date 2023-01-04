@@ -1,7 +1,8 @@
 const fs = require('fs');
 const controller = require('./controller');
 
-const callArr = {
+const getParams = {};
+const pageArr = {
     '/' : 'home',
     '/about' : 'about',
     '/contacts' : 'contacts',
@@ -10,25 +11,23 @@ const callArr = {
 
 const getReq = (request) => {
     request = request.split('&');
-    var obj = {};
     request.forEach(element => {
         element = element.split('=');
-        obj[element[0]] = element[1];
+        getParams[element[0]] = element[1];
     });
-
-    return obj;
 }
 
 module.exports.getResponse = (url, res) => {
         res.setHeader('Content-type','text/html');
-        var params = {};
+
         if(url.includes('?')){
-            params = getReq(url.split('?')[1]);
-            url = url.split('?')[0];
+            url = url.split('?');
+            getReq(url[1]);
+            url = url[0];
         }
-        if(url in callArr){
+        if(url in pageArr){
             res.statusCode = 200;
-            controller[callArr[url]](res, params);
+            controller[pageArr[url]](res, getParams);
         }
         else{
             res.statusCode = 404;
@@ -39,6 +38,7 @@ module.exports.getResponse = (url, res) => {
 
 module.exports.sendFile = (url, res) => {
     var fileType = url.split('.')[1];
+    
     fs.readFile('public/' + fileType + '/' + url, (error,file) => {
         if(error){
             this.getResponse(url, res);
